@@ -113,7 +113,7 @@
                 <span class="icon-bar"></span>
                 <span class="icon-bar"></span>
             </button>
-            <a class="navbar-brand" href="#">伽蓝忘川的博客</a>
+            <a class="navbar-brand" href="#">AndOne的博客</a>
         </div>
         <div class="navbar-collapse collapse">
             <ul class="nav navbar-nav">

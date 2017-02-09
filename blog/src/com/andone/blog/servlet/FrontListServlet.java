@@ -62,16 +62,16 @@ public class FrontListServlet extends HttpServlet {
 			if(post.getContent()==null){
 				continue;
 			}
-			String temp1 = post.getContent().replace("<p>", "");
-			String temp = temp1.replace("</p>", "");
+			String content = post.getContent();
+			String regex = "<[^>]*>";
+			String temp = content.replaceAll(regex, "");
 			temp += "......";
-			if(temp.length() > 150){
-				post.setSummary(temp.substring(0, 150) + "......");
+			if(temp.length() > 200){
+				post.setSummary(temp.substring(0, 200) + "......");
 			}
 			else{
 				post.setSummary(temp);
-			}
-			
+			}			
 		}
 		request.setAttribute("result", result);
 		request.getRequestDispatcher("/jsp/frontIndex.jsp").forward(request, response);

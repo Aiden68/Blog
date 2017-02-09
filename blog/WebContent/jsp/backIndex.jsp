@@ -1,6 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%@taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
+<%  String path = request.getContextPath(); %>
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
 <head>
@@ -78,12 +79,12 @@
                 <span class="icon-bar"></span>
                 <span class="icon-bar"></span>
             </button>
-            <a class="navbar-brand" href="#">博客管理系统</a>
+            <a class="navbar-brand" href="<%=path %>">AndOne博客管理</a>
         </div>
 
         <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
             <ul class="nav navbar-nav">
-                <li ><a href="#">首页</a></li>
+                <li ><a href="<%=path %>">首页</a></li>
                 <li class="dropdown">
                     <a href="#" class="dropdown-toggle" data-toggle="dropdown">功能<span class="caret"></span></a>
                     <ul class="dropdown-menu" role="menu">
@@ -119,7 +120,7 @@
             <ul class="nav nav-sidebar">
                 <li><a href="${pageContext.request.contextPath }/listpost">博客列表</a></li>
                 <li><a href="${pageContext.request.contextPath }/jsp/addPost.jsp">创建博客</a></li>
-                <li><a href="#">信息管理</a></li>
+                <li><a href="${pageContext.request.contextPath }/listcomment">评论列表</a></li>
             </ul>
             <ul class="nav nav-sidebar">
                 <li><a href="#">设置</a></li>

@@ -11,357 +11,169 @@
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title>伽蓝忘川的博客</title>
-    <link href="<%=path %>/jsp/css/bootstrap.min.css" rel="stylesheet">
-	<link href="<%=path %>/jsp/css/pagination.css" rel="stylesheet">
-	
-    <!--[if lt IE 9]>
-    <script src="js/html5shiv.js"></script>
-    <script src="js/respond.min.js"></script>
-    <![endif]-->
-
-    <style>
-
-        body {
-            padding-top: 50px;
-            padding-bottom: 40px;
-            color: #5a5a5a;
-        }
-
-        /* 轮播广告 */
-
-        /* .carousel {
-            height: 500px;
-            margin-bottom: 60px;
-        }
-
-        .carousel .item {
-            height: 500px;
-            background-color: #000;
-        }
-
-        .carousel .item img {
-            width: 100%;
-        }
-
-        .carousel-caption {
-            z-index: 10;
-        }
-
-        .carousel-caption p {
-            margin-bottom: 20px;
-            font-size: 20px;
-            line-height: 1.8;
-        } */
-
-        /* 简介 */
-
-        .summary {
-            padding-right: 15px;
-            padding-left: 15px;
-        }
-
-        .summary .col-md-4 {
-            margin-bottom: 20px;
-            text-align: center;
-        }
-
-        /* 特性 */
-
-        .feature-divider {
-            margin: 40px 0;
-        }
-
-        .feature {
-            padding: 30px 0;
-        }
-
-        .feature-heading {
-            font-size: 50px;
-            color: #2a6496;
-        }
-
-        .feature-heading .text-muted {
-            font-size: 28px;
-        }
-
-        /* 响应式布局 */
-
-        @media (max-width: 768px) {
-
-            .summary {
-                padding-right: 3px;
-                padding-left: 3px;
-            }
-
-            .carousel {
-                height: 300px;
-                margin-bottom: 30px;
-            }
-
-            .carousel .item {
-                height: 300px;
-            }
-
-            .carousel img {
-                min-height: 300px;
-            }
-
-            .carousel-caption p {
-                font-size: 16px;
-                line-height: 1.4;
-            }
-
-            .feature-heading {
-                font-size: 34px;
-            }
-
-            .feature-heading .text-muted {
-                font-size: 22px;
-            }
-        }
-
-        @media (min-width: 992px) {
-            .feature-heading {
-                margin-top: 120px;
-            }
-        }
-    </style>
-
+    <link rel="stylesheet" type="text/css" href="<%=path %>/jsp/css/reset.css">
+	<link rel="stylesheet" type="text/css" href="<%=path %>/jsp/css/main2.css">
+	<link href="<%=path %>/jsp/css/bootstrap.min.css" rel="stylesheet">
+	<link href="<%=path %>/jsp/css/pagination.css" rel="stylesheet">	
+    <link href="<%=path%>/jsp/font-awesome/4.5.0/css/font-awesome.min.css" rel="stylesheet">
 </head>
-
 <body>
-<!-- 顶部导航 -->
-<div class="navbar navbar-inverse navbar-fixed-top" role="navigation" id="menu-nav">
-    <div class="container">
-        <div class="navbar-header">
-            <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
-                <span class="sr-only">切换导航</span>
-                <span class="icon-bar"></span>
-                <span class="icon-bar"></span>
-                <span class="icon-bar"></span>
-            </button>
-            <a class="navbar-brand" href="#">伽蓝忘川的博客</a>
-        </div>
-        <div class="navbar-collapse collapse">
-            <ul class="nav navbar-nav">
-                <li class="active"><a href="#ad-carousel">首页</a></li>
-<!--                 <li><a href="#summary-container">简述</a></li> -->
-                <li class="dropdown">
-                    <a href="#" class="dropdown-toggle" data-toggle="dropdown">分类 <span class="caret"></span></a>
-                    <ul class="dropdown-menu" role="menu">
-                        <li><a href="#feature-tab" data-tab="tab-chrome">java</a></li>
-                        <li><a href="#feature-tab" data-tab="tab-firefox">c++</a></li>
-                        <li><a href="#feature-tab" data-tab="tab-safari">python</a></li>
-                        <li><a href="#feature-tab" data-tab="tab-opera">javascript</a></li>
-                        <li><a href="#feature-tab" data-tab="tab-ie">algorithm</a></li>
-                    </ul>
-                </li>
-            </ul>
-            <ul class="nav navbar-nav navbar-right">
-              <li><a href="#" data-toggle="modal" data-target="#about-modal">登陆</a></li>
-              <li><a href="#" data-toggle="modal" data-target="#about-modal">注册</a></li>
-            </ul>
-            <form class="navbar-form navbar-right">
-                <div class="form-group">
-                  <input type="text" class="form-control" placeholder="Search">
-                </div>
-                <button type="submit" class="btn btn-default">搜索</button>
-              </form>
-            
-        </div>
-    </div>
-</div>
-
-
-<!-- 广告轮播 -->
-<%-- <div id="ad-carousel" class="carousel slide" data-ride="carousel">
-    <ol class="carousel-indicators">
-        <li data-target="#ad-carousel" data-slide-to="0" class="active"></li>
-        <li data-target="#ad-carousel" data-slide-to="1"></li>
-        <li data-target="#ad-carousel" data-slide-to="2"></li>
-        <li data-target="#ad-carousel" data-slide-to="3"></li>
-        <li data-target="#ad-carousel" data-slide-to="4"></li>
-    </ol>
-    <div class="carousel-inner">
-        <div class="item active">
-            <img src="<%=path %>/jsp/images/bg1.jpg" alt="1 slide">
-
-            <div class="container">
-                <div class="carousel-caption">
-                    <h1>Chrome</h1>
-
-                    <p>Google Chrome，又称Google浏览器，是一个由Google（谷歌）公司开发的网页浏览器。</p>
-
-                    <p><a class="btn btn-lg btn-primary" href="http://www.google.cn/intl/zh-CN/chrome/browser/"
-                          role="button" target="_blank">点我下载</a></p>
-                </div>
-            </div>
-        </div>
-        <div class="item">
-            <img src="<%=path %>/jsp/images/bg2.jpg" alt="2 slide">
-
-            <div class="container">
-                <div class="carousel-caption">
-                    <h1>Firefox</h1>
-
-                    <p>Mozilla Firefox，中文名通常称为“火狐”或“火狐浏览器”，是一个开源网页浏览器。</p>
-
-                    <p><a class="btn btn-lg btn-primary" href="http://www.firefox.com.cn/download/" target="_blank"
-                          role="button">点我下载</a></p>
-                </div>
-            </div>
-        </div>
-        <div class="item">
-            <img src="<%=path %>/jsp/images/safari-big.jpg" alt="3 slide">
-
-            <div class="container">
-                <div class="carousel-caption">
-                    <h1>Safari</h1>
-
-                    <p>Safari，是苹果计算机的最新操作系统Mac OS X中的浏览器。</p>
-
-                    <p><a class="btn btn-lg btn-primary" href="http://www.apple.com/cn/safari/" target="_blank"
-                          role="button">点我下载</a></p>
-                </div>
-            </div>
-        </div>
-        <div class="item">
-            <img src="<%=path %>/jsp/images/opera-big.jpg" alt="4 slide">
-
-            <div class="container">
-                <div class="carousel-caption">
-                    <h1>Opera</h1>
-
-                    <p>Opera浏览器，是一款挪威Opera Software ASA公司制作的支持多页面标签式浏览的网络浏览器。</p>
-
-                    <p><a class="btn btn-lg btn-primary" href="http://www.opera.com/zh-cn" target="_blank"
-                          role="button">点我下载</a></p>
-                </div>
-            </div>
-        </div>
-        <div class="item">
-            <img src="<%=path %>/jsp/images/ie-big.jpg" alt="5 slide">
-
-            <div class="container">
-                <div class="carousel-caption">
-                    <h1>IE</h1>
-
-                    <p>Internet Explorer，简称 IE，是微软公司推出的一款网页浏览器。</p>
-
-                    <p><a class="btn btn-lg btn-primary" href="http://ie.microsoft.com/" target="_blank"
-                          role="button">点我下载</a></p>
-                </div>
-            </div>
-        </div>
-    </div>
-    <a class="left carousel-control" href="#ad-carousel" data-slide="prev"><span
-            class="glyphicon glyphicon-chevron-left"></span></a>
-    <a class="right carousel-control" href="#ad-carousel" data-slide="next"><span
-            class="glyphicon glyphicon-chevron-right"></span></a>
-</div> --%>
-
-
-<!-- 主要内容 -->
-<div style="margin-top: 30px" class="container summary">
-
-    <div class="row" id="summary-container">
+	<nav class="navbar navbar-default">
+	  <div class="container-fluid">
+	    <!-- Brand and toggle get grouped for better mobile display -->
+	    <div class="navbar-header">
+	      <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1" aria-expanded="false">
+	        <span class="sr-only">Toggle navigation</span>
+	        <span class="icon-bar"></span>
+	        <span class="icon-bar"></span>
+	        <span class="icon-bar"></span>
+	      </button>
+	      <a class="navbar-brand" href="<%=path %>">AndOne的博客</a>
+	    </div>
+	
+	    <!-- Collect the nav links, forms, and other content for toggling -->
+	    <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+	      <ul class="nav navbar-nav">
+	        <li ><a href="#">&nbsp; <span class="sr-only">(current)</span></a></li>
+	
+	      </ul>
+	      <form class="navbar-form navbar-left">
+	        <div class="form-group">
+	          <input type="text" class="form-control" placeholder="Search">
+	        </div>
+	        <button type="submit" class="btn btn-default"><span class="glyphicon glyphicon-search" aria-hidden="true"></span></button>
+	      </form>
+	      <ul class="nav navbar-nav navbar-right">
+	        <li><a class="active" href="#">首页</a></li>
+	        <li><a  href="#">图册</a></li>
+			<li id="sidebar_trigger"><a  href="#">分类</a></li>
+	      </ul>
+	    </div><!-- /.navbar-collapse -->
+	  </div><!-- /.container-fluid -->
+	</nav>
+	<div class="container" style="min-height: 100%;">
         <div class="col-md-2">
             
         </div>
-        <div class="col-md-8">
+        <div  class="col-md-8">
+        	
         	<form action="<%=path %>/index?pageNum=new_page_index+1" id="postForm" method="post">
 			<c:forEach items="${result.resultList}" var="post">
-				<h3 >
-                	<a href="<%=path %>/postdetail?id=${post.id}">${post.title }</a>
-		        </h3>
-	            <h4><small><fmt:formatDate value="${post.createTime }" type="both"></fmt:formatDate></small></h4>
-	            <p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;${post.summary }</p>
-	            <p class="text-right"><a  href="<%=path %>/postdetail?id=${post.id}" >read more</a></p>
-				<hr>
+			<article class="post post-type-normal" style="opacity: 1; display: block; transform: translateY(0px);">
+					<header class="post-header">
+						<h1 style="text-align: center;">
+							<a style="font-weight: 400;
+								font-family: 
+								display: inline-block;
+								position: relative;
+								color: #555;
+								word-break: break-word;
+								border-bottom: none;
+								line-height: 1.2;
+								vertical-align: top;
+								font-size: 25px;
+								
+								font-family: 'Lato', 'PingFang SC', 'Microsoft YaHei', 'sans-serif';" 
+								href="<%=path %>/postdetail?id=${post.id}" class="mytitle">&nbsp;
+							${post.title }
+							</a>
+						</h1>
+						<div class="mypost-meta">
+							<span style="text-align: center;" class="post-time">
+								<span >
+									<i class="fa fa-calendar-o"></i>
+								</span>
+								<span>< fmt:setLocale value="en"/> < fmt:formatDate value="${post.createTime}"/> </span>
+							</span>
+
+
+							<span >
+								&nbsp; | &nbsp;
+								<span class="post-meta-item-icon">
+									<i class="fa fa-folder-o"></i>
+								</span>
+								<span >In</span>
+								<span >
+									<a href="#" rel="index">
+										<span>algorithm</span>
+									</a>
+								</span>
+							</span>
+							<span class="post-comments-count">
+								&nbsp; | &nbsp;
+								<a href="#" >
+									<span >0条评论</span>
+								</a>
+							</span>
+							<span >
+								&nbsp; | &nbsp;
+								<span class="post-meta-item-icon">
+									<i class="fa fa-eye"></i>
+								</span>
+								<span>visitors </span>
+								<span>700</span>
+							</span>
+						</div>
+					</header>
+					<div style="margin-top: 0px;
+					padding-top: 0;font-family: 'Lato', 'PingFang SC', 'Microsoft YaHei', 'sans-serif';" 
+					class="post-body" itemprop="articleBody">
+						<p>${post.summary }</p>
+						<div class="post-more-link">
+						<a onMouseIn="this.style.backgroundColor=''" class="btn" href="<%=path %>/postdetail?id=${post.id}">
+							Read more »
+						</a>
+						</div>
+					</div>
+					<hr>
+					<footer class="post-footer">
+						<div class="post-eof"></div>
+
+					</footer>
+				</article>
+			
 			</c:forEach>
             <div id="News-Pagination" align="center"></div>
             </form>
+            
         </div>
         
         <div class="col-md-2">
             
         </div>
     </div>
-    <!-- 关于 -->
-    <div class="modal fade" id="about-modal" tabindex="-1" role="dialog" aria-labelledby="modal-label"
-         aria-hidden="true">
-        <div class="modal-dialog">
-            <div class="modal-content">
-                <div class="modal-header">
-                    <button type="button" class="close" data-dismiss="modal"><span
-                            aria-hidden="true">&times;</span><span class="sr-only">关闭</span></button>
-                    <h4 class="modal-title" id="modal-label">登陆</h4>
-                </div>
-                <div class="modal-body">
-                    <form action="" method="post"  class="form-horizontal">
-                        <fieldset>
-                            <div class="control-group">
+	<footer class="footer">
+		<ul class="share-group">
+			<li><i class="fa fa-weixin fa-2x"></i>微信</li>
+			<li><i class="fa fa-qq fa-2x"></i>QQ</li>
+			<li><i class="fa fa-weibo fa-2x"></i>新浪微博</li>
+			<a href="https://github.com/Aiden68" target="_blank"><li><i class="fa fa-github fa-2x"></i>GitHub</li></a>
+			<li><i class="fa  fa-facebook fa-2x"></i>FaceBook</li>
+		</ul>
+		<div class="copy">
+			©AndOne 2016 10-06
+		</div>
+	</footer>
 
-                                  <!-- Text input-->
-                                  <label class="control-label" for="input01">用户名</label>
-                                  <div class="controls">
-                                    <input type="text" placeholder="请输入用户名" class="form-control">
-
-                                    <p class="help-block"></p>
-                                  </div>
-                                </div>
-
-                            <div class="control-group">
-
-                              <!-- Text input-->
-                              <label class="control-label" for="input01">密码</label>
-                              <div class="controls">
-                                <input type="text" placeholder="请输入密码" class="form-control">
-                                <p class="help-block"></p>
-                              </div>
-                            </div>
-
-                        </fieldset>
-                    </form>
-                </div>
-                <div class="modal-footer">
-                    <button type="button" class="btn btn-default" data-dismiss="modal">登陆</button>
-                </div>
-            </div>
-        </div>
-    </div>
-
-
-    <footer>
-        <p class="pull-right"><a href="#top">回到顶部</a></p>
-
-        <p align="center">&copy; 2016 AndOne </p>
-    </footer>
-
+<div class="mask"></div>
+<div id="sidebar">
+	<ul>
+		<li><a class="active" href="#">所有文章</a></li>
+		<li><a href="#">algorithm</a></li>
+		<li><a href="#">java</a></li>
+		<li><a href="#">c&c++</a></li>
+		<li><a href="#">python</a></li>
+		<li><a href="#">tool</a></li>
+	</ul>
 </div>
+<button class="back-to-top">返回顶部</button>
 
 <script src="<%=path %>/jsp/js/jquery-1.11.1.min.js"></script>
 <script src="<%=path %>/jsp/js/bootstrap.min.js"></script>
+<script src="<%=path %>/jsp/js/main.js"></script>
 <script src="<%=path %>/jsp/js/jquery.pagination.js"></script>
-<script>
-    $(function () {
-        $('#ad-carousel').carousel();
-        $('#menu-nav .navbar-collapse a').click(function (e) {
-            var href = $(this).attr('href');
-            var tabId = $(this).attr('data-tab');
-            if ('#' !== href) {
-                e.preventDefault();
-                $(document).scrollTop($(href).offset().top - 70);
-                if (tabId) {
-                    $('#feature-tab a[href=#' + tabId + ']').tab('show');
-                }
-            }
-        });
-    });
-</script>
-<script type="text/javascript">
 
+<script type="text/javascript">
 // 点击分页按钮以后触发的动作
 function handlePaginationClick(new_page_index, pagination_container) {
     $("#postForm").attr("action", "<%=path %>/index?pageNum=" + (new_page_index+1));

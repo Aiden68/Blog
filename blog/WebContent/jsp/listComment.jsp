@@ -16,7 +16,8 @@
 <script src="js/respond.min.js"></script>
 <![endif]-->
 <style>
-    body {
+    html,body {
+    	height:100%;
         padding-top: 50px;
         padding-bottom: 40px;
         color: #5a5a5a;
@@ -79,7 +80,7 @@
                 <span class="icon-bar"></span>
                 <span class="icon-bar"></span>
             </button>
-            <a class="navbar-brand" href="#">AneOne博客管理</a>
+            <a class="navbar-brand" href="#">AndOne博客管理</a>
         </div>
 
         <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
@@ -109,7 +110,7 @@
 </nav>
 
 <!—自适应布局-->
-<div class="container-fluid">
+<div style="min-height:100%" class="container-fluid">
     <div class="row">
         <!—左侧导航栏-->
 
@@ -118,9 +119,9 @@
                 <li ><a href="#">首页</a></li>
             </ul>
             <ul class="nav nav-sidebar">
-                <li class="active"><a  href="#">博客列表</a></li>
+                <li><a  href="<%=path %>/listpost">博客列表</a></li>
                 <li><a href="<%=path%>/jsp/addPost.jsp">创建博客</a></li>
-                <li><a href="<%=path%>/listcomment">评论列表</a></li>
+                <li><a class="active" href="<%=path%>/listcomment">评论列表</a></li>
             </ul>
             <ul class="nav nav-sidebar">
                 <li><a href="#">设置</a></li>
@@ -137,25 +138,25 @@
                     <div class="col-md-1">
                     </div>
                     <div class="col-md-10">
-		            <h2 style="margin: 20px 0;">文章列表</h2>
+		            <h2 style="margin: 20px 0;">评论列表</h2>
 		            <table align="center" class="text-center table table-striped  table-hover">
 		               <thead>
 		                 <tr>
 		                   <th class="text-center">序号</th>
-		                   <th class="text-center">标题</th>
-		                   <th class="text-center">文章编号</th>
+		                   <th class="text-center">用户昵称</th>
+		                   <th class="text-center">博客编号</th>
 		                   <th class="text-center">创建时间</th>
 		                   <th class="text-center">操作</th>
 		                 </tr>
 		               </thead>
 		               <tbody>
-		               <c:forEach items="${list}" var="post" varStatus="vars">
+		               <c:forEach items="${comList}" var="com" varStatus="vars">
 							<tr>
 								<td>${vars.count }</td>
-								<td>${post.title }</td>
-								<td>${post.id }</td>
-								<td>${post.createTime }</td>
-								<td><a href="${pageContext.request.contextPath }/editpost?id=${post.id}">修改</a>&nbsp;&nbsp;&nbsp;<a href="${pageContext.request.contextPath }/deletepost?id=${post.id}">删除</a></td>
+								<td>${com.name }</td>
+								<td>${com.pid }</td>
+								<td>${com.createTime }</td>
+								<td><a href="#">回复</a>&nbsp;&nbsp;&nbsp;<a href="<%=path %>/deletecomment?id=${com.id}">删除</a></td>
 							</tr>
 						</c:forEach>
 		               </tbody>

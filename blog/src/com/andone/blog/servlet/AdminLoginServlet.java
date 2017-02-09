@@ -39,7 +39,6 @@ public class AdminLoginServlet extends HttpServlet {
 		if(admin != null){
 			HttpSession session = request.getSession();
 			session.setAttribute("username", username);
-			System.out.println(session.getAttribute("username") + "1");
 			response.sendRedirect(request.getContextPath()+"/jsp/backIndex.jsp");
 		}
 		else{

@@ -1,8 +1,13 @@
 #博客简介：  
 
-     制作该博客网站的目的：
-         练手javaweb。
-     目前版本后端没有使用任何框架。
-     本博客系统基本上做到了最简：前端仅用了bootstrap，后台用的servlet+dbutil
+     制作该博客网站的目的：
+         练手javaweb。
+     目前版本后端没有使用任何框架。
+     本博客系统基本上做到了最简：
+     前端用了bootstrap，后台用的servlet+dbutil+c3p0
      
-     博客地址：http://www.andonej.cn/
+     首页地址：http://www.andonej.cn/                                 
+
+#其他：  
+
+     会不断添加新的模块与内容，一步一步去完善吧。后面应该会用框架再写一遍。

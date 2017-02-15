@@ -91,7 +91,7 @@
                         <li class="dropdown-header">业务功能</li>
                         <li class="active"><a href="#">博客列表</a></li>
                         <li><a href="/jsp/addPost.jsp">创建博客</a></li>
-                        <li><a href="#">信息管理</a></li>
+                        <li><a href="<%=path%>/image?type=4">图片管理</a></li>
                         <li class="divider"></li>
                         <li class="dropdown-header">系统功能</li>
                         <li><a href="#">设置</a></li>
@@ -121,6 +121,7 @@
                 <li><a href="${pageContext.request.contextPath }/listpost">博客列表</a></li>
                 <li><a href="${pageContext.request.contextPath }/jsp/addPost.jsp">创建博客</a></li>
                 <li><a href="${pageContext.request.contextPath }/listcomment">评论列表</a></li>
+                <li><a href="<%=path%>/image?type=4">图片管理</a></li>
             </ul>
             <ul class="nav nav-sidebar">
                 <li><a href="#">设置</a></li>

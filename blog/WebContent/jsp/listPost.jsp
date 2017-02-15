@@ -91,7 +91,7 @@
                         <li class="dropdown-header">业务功能</li>
                         <li class="active"><a href="#">博客列表</a></li>
                         <li><a href="<%=path%>/jsp/addPost.jsp">创建博客</a></li>
-                        <li><a href="#">信息管理</a></li>
+                        <li><a href="<%=path%>/image?type=4">图片管理</a></li>
                         <li class="divider"></li>
                         <li class="dropdown-header">系统功能</li>
                         <li><a href="#">设置</a></li>
@@ -121,6 +121,7 @@
                 <li class="active"><a  href="#">博客列表</a></li>
                 <li><a href="<%=path%>/jsp/addPost.jsp">创建博客</a></li>
                 <li><a href="<%=path%>/listcomment">评论列表</a></li>
+                <li><a href="<%=path%>/image?type=4">图片管理</a></li>
             </ul>
             <ul class="nav nav-sidebar">
                 <li><a href="#">设置</a></li>
@@ -155,7 +156,8 @@
 								<td>${post.title }</td>
 								<td>${post.id }</td>
 								<td>${post.createTime }</td>
-								<td><a href="${pageContext.request.contextPath }/editpost?id=${post.id}">修改</a>&nbsp;&nbsp;&nbsp;<a href="${pageContext.request.contextPath }/deletepost?id=${post.id}">删除</a></td>
+								<td><a href="${pageContext.request.contextPath }/editpost?id=${post.id}">修改</a>&nbsp;&nbsp;&nbsp;
+								<a href="#" data-toggle="modal" data-target="#myModa3" url="${post.id }">删除</a></td>
 							</tr>
 						</c:forEach>
 		               </tbody>
@@ -188,8 +190,37 @@
 </div>
 </div>
 
+<!-- 删除 start -->
+    <div class="modal fade" id="myModa3" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+      <div class="modal-dialog" style="width: 400px">
+        <div class="modal-content">
+          <div  class="modal-header">
+            <h4 class="modal-title" id="myModalLabe3">确定要删除吗?</h4>
+          </div>
+          <div class="modal-body" style="text-align: center;">
+            <h5 class="modal-title" id="myModalLabe3">删除后的博客将不能恢复！</h4>
+          </div>
+          <div class="modal-footer">
+            <button type="button" class="btn btn-default" data-dismiss="modal">取消</button>
+            <button type="button" class="btn btn-danger" id="delete">确定</button>
+          </div>
+        </div>
+      </div>
+    </div>
+<!-- 删除 end -->
 
 <script src="<%=path%>/jsp/js/jquery-1.11.1.min.js" type="text/javascript"></script>
 <script src="<%=path%>/jsp/js/bootstrap.min.js" type="text/javascript"></script>
+<script type="text/javascript">
+	var id;
+	$("table tr a").click(function(){
+		id = $(this).attr('url');
+	});
+	
+	$("#delete").click(function(){	
+        $('#myModa3').modal('hide');
+        location.href = '${pageContext.request.contextPath}/deletepost?id=' + id; 
+	})
+</script>
 </body>
 </html>

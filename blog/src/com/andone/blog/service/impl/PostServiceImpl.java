@@ -38,8 +38,18 @@ public class PostServiceImpl implements PostService {
 	}
 
 	@Override
-	public Pager<Post> pageFind(Post post, int currenNum, int pageSize) {
-		return postDao.pageFind(post, currenNum, pageSize);
+	public Pager<Post> pageFind(Post post, int currenNum, int pageSize, String search, String catName) {
+		return postDao.pageFind(post, currenNum, pageSize,search, catName);
+	}
+
+	@Override
+	public void updatePostVisitors(String id, int visitors) {
+		postDao.updatePostVisitors(id, visitors);
+	}
+
+	@Override
+	public void updatePostComSize(String id, int comSize) {
+		postDao.updatePostComSize(id, comSize);
 	}
 
 }

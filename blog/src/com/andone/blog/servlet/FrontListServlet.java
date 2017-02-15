@@ -9,8 +9,11 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import com.andone.blog.entity.Catagory;
 import com.andone.blog.entity.Post;
+import com.andone.blog.service.CatagoryService;
 import com.andone.blog.service.PostService;
+import com.andone.blog.service.impl.CatagoryServiceImpl;
 import com.andone.blog.service.impl.PostServiceImpl;
 import com.andone.blog.util.Constant;
 import com.andone.blog.util.Pager;
@@ -36,11 +39,20 @@ public class FrontListServlet extends HttpServlet {
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		PostService postService = new PostServiceImpl();
+		CatagoryService catagoryService  = new CatagoryServiceImpl();
 		List<Post> list = postService.findAllPost();
+		List<Catagory> catList = catagoryService.findAllCat();
 		Post ppost = new Post();
+		Pager<Post> result;
 //		int currentPage = Integer.parseInt(request.getParameter("currentPage"));
 		// 校验pageNum参数输入合法性
-		String pageNumStr = request.getParameter("pageNum"); 
+		String pageNumStr = request.getParameter("pageNum");
+		String search = request.getParameter("search");
+		String catName =request.getParameter("catName");
+		if(catName != null){
+			catName = new String(catName.getBytes("ISO-8859-1"), "utf-8");
+		}
+		String flag = request.getParameter("flag");
 		if(pageNumStr !=null && !StringUtil.isNum(pageNumStr)){
 			request.setAttribute("errorMsg", "参数传输错误");
 			request.getRequestDispatcher("jdbcSqlStudent.jsp").forward(request, response);
@@ -57,7 +69,15 @@ public class FrontListServlet extends HttpServlet {
 		if(pageSizeStr!=null && !"".equals(pageSizeStr.trim())){
 			pageSize = Integer.parseInt(pageSizeStr);
 		}
-		Pager<Post> result = postService.pageFind(ppost, currentPage, pageSize);
+		if(search != null){
+			result = postService.pageFind(ppost, currentPage, pageSize, search, null);
+		}
+		else if(catName != null){
+			result = postService.pageFind(ppost, currentPage, pageSize, null, catName);
+		}
+		else {
+			result = postService.pageFind(ppost, currentPage, pageSize, null, null);
+		}
 		for(Post post:result.getResultList()){
 			if(post.getContent()==null){
 				continue;
@@ -74,6 +94,7 @@ public class FrontListServlet extends HttpServlet {
 			}			
 		}
 		request.setAttribute("result", result);
+		request.setAttribute("catList", catList);
 		request.getRequestDispatcher("/jsp/frontIndex.jsp").forward(request, response);
 	}
 

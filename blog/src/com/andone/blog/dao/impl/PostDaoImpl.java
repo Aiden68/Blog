@@ -1,14 +1,12 @@
 package com.andone.blog.dao.impl;
 
+import java.sql.Connection;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
-import javax.print.PrintException;
-
 import org.apache.commons.dbutils.QueryRunner;
-import org.apache.commons.dbutils.ResultSetHandler;
 import org.apache.commons.dbutils.handlers.BeanHandler;
 import org.apache.commons.dbutils.handlers.BeanListHandler;
 import org.apache.commons.dbutils.handlers.ScalarHandler;
@@ -17,10 +15,6 @@ import com.andone.blog.dao.PostDao;
 import com.andone.blog.entity.Post;
 import com.andone.blog.util.JdbcUtil;
 import com.andone.blog.util.Pager;
-import com.mysql.jdbc.Connection;
-import com.sun.glass.ui.Pixels.Format;
-
-import javafx.geometry.Pos;
 
 public class PostDaoImpl implements PostDao {
 	
@@ -102,7 +96,7 @@ public class PostDaoImpl implements PostDao {
 	}
 
 	@Override
-	public Pager<Post> pageFind(Post post, int currentNum, int pageSize) {
+	public Pager<Post> pageFind(Post post, int currentNum, int pageSize, String search, String catName) {
 		Pager<Post> result = null;
 		// 存放查询参数
 		List<Object> paramList = new ArrayList<Object>();
@@ -115,17 +109,21 @@ public class PostDaoImpl implements PostDao {
 		StringBuilder countSql = new StringBuilder(
 				"select count(id) as totalRecord from posts where 1=1 ");
 
-//		if (stuName != null && !stuName.equals("")) {
-//			sql.append(" and stu_name like ?");
-//			countSql.append(" and stu_name like ?");
-//			paramList.add("%" + stuName + "%");
-//		}
+		if (search != null && !search.equals("")) {
+			sql.append(" and title like ?");
+			sql.append(" or content like ?");
+			countSql.append(" and title like ?");
+			countSql.append(" and content like ?");
+			paramList.add("%" + search + "%");
+			paramList.add("%" + search + "%");
+		}
+		
+		if (catName != null && !catName.equals("")) {
+			sql.append(" and catName=?");
+			countSql.append(" and catName=?");
+			paramList.add(catName);
+		}
 
-//		if (gender == Constant.GENDER_FEMALE || gender == Constant.GENDER_MALE) {
-//			sql.append(" and gender = ?");
-//			countSql.append(" and gender = ?");
-//			paramList.add(gender);
-//		}
 		sql.append(" order by createTime desc");
 		// 起始索引
 		int fromIndex	= pageSize * (currentNum -1);
@@ -133,19 +131,23 @@ public class PostDaoImpl implements PostDao {
 		// 使用limit关键字，实现分页
 		sql.append(" limit " + fromIndex + ", " + pageSize );
 		
-		// 存放所有查询出的学生对象
-		List<Post> postList = new ArrayList<Post>();
 		List<Post> list = new ArrayList<>();
+		int totalRecord;
 		try{
 			conn = (Connection) JdbcUtil.getConnection();
-			list = qr.query(conn, sql.toString(), new BeanListHandler<Post>(Post.class));
-			int totalRecord = qr.query(conn, countSql.toString(), new ScalarHandler<Long>()).intValue();
+//			if(paramList.size() != 0){
+				list = qr.query(conn, sql.toString(), new BeanListHandler<Post>(Post.class), paramList.toArray());
+				totalRecord = qr.query(conn, countSql.toString(), new ScalarHandler<Long>(), paramList.toArray()).intValue();
+//			}
+			/*else{
+				list = qr.query(conn, sql.toString(), new BeanListHandler<Post>(Post.class));
+				totalRecord = qr.query(conn, countSql.toString(), new ScalarHandler<Long>()).intValue();
+			}*/
 			//获取总页数
 			int totalPage = totalRecord / pageSize;
 			if(totalRecord % pageSize !=0){
 				totalPage++;
 			}
-			
 			// 组装pager对象
 			result = new Pager<Post>(pageSize, currentNum, 
 							totalRecord, totalPage, list);
@@ -155,6 +157,44 @@ public class PostDaoImpl implements PostDao {
 			JdbcUtil.closeAll(conn, null, null);
 		}
 		return result;
+	}
+
+	@Override
+	public void updatePostVisitors(String id, int visitors) {
+		try{
+			String sql = "UPDATE posts SET visitor=? WHERE id=?";
+			conn = (Connection) JdbcUtil.getConnection();	
+			qr.update(conn, sql, visitors,id);
+		} catch (Exception e) {
+			throw new RuntimeException(e);
+		} finally {
+			JdbcUtil.closeAll(conn, null, null);
+		}
+	}
+
+	@Override
+	public void updatePostComSize(String id, int comSize) {
+		try{
+			String sql = "UPDATE posts SET comSize=? WHERE id=?";
+			conn = (Connection) JdbcUtil.getConnection();	
+			qr.update(conn, sql, comSize,id);
+		} catch (Exception e) {
+			throw new RuntimeException(e);
+		} finally {
+			JdbcUtil.closeAll(conn, null, null);
+		}
+	}
+
+	@Override
+	public void updateVisitors(Post post) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public void updateComSize(Post post) {
+		// TODO Auto-generated method stub
+		
 	}
 
 }

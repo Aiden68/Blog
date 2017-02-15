@@ -9,7 +9,7 @@ import sun.net.www.http.PosterOutputStream;
 
 public interface PostService {
 
-void addPost(Post post);
+	void addPost(Post post);
 	
 	List<Post> findAllPost();
 	
@@ -17,7 +17,11 @@ void addPost(Post post);
 	
 	void updatePost(Post post);
 	
+	void updatePostVisitors(String id, int visitors);
+	
+	void updatePostComSize(String id, int comSize);
+	
 	Post postFindById(String id);
 	
-	Pager<Post> pageFind(Post post,int currenNum, int pageSize);
+	Pager<Post> pageFind(Post post,int currenNum, int pageSize, String search, String catName);
 }

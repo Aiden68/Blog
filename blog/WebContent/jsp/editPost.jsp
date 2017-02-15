@@ -113,7 +113,7 @@
                 <span class="icon-bar"></span>
                 <span class="icon-bar"></span>
             </button>
-            <a class="navbar-brand" href="#">伽蓝忘川的博客</a>
+            <a class="navbar-brand" href="#">AndOne的博客</a>
         </div>
         <div class="navbar-collapse collapse">
             <ul class="nav navbar-nav">
@@ -122,11 +122,12 @@
                 <li class="dropdown">
                     <a href="#" class="dropdown-toggle" data-toggle="dropdown">分类 <span class="caret"></span></a>
                     <ul class="dropdown-menu" role="menu">
-                        <li><a href="#feature-tab" data-tab="tab-chrome">Chrome</a></li>
-                        <li><a href="#feature-tab" data-tab="tab-firefox">Firefox</a></li>
-                        <li><a href="#feature-tab" data-tab="tab-safari">Safari</a></li>
-                        <li><a href="#feature-tab" data-tab="tab-opera">Opera</a></li>
-                        <li><a href="#feature-tab" data-tab="tab-ie">IE</a></li>
+                        <li><a href="<%=path%>/listpost">博客列表</a></li>
+                        <li><a href="<%=path%>/jsp/addPost.jsp">创建博客</a></li>
+                        <li><a href="<%=path%>/image?type=4">图片管理</a></li>
+                        <li class="divider"></li>
+                        <li class="dropdown-header">系统功能</li>
+                        <li><a href="#">设置</a></li>
                     </ul>
                 </li>
             </ul>
@@ -135,12 +136,6 @@
 	              <li><a href="${pageContext.request.contextPath }/logout" >退出</a></li>
 	            </ul>
             </c:if>
-            <form class="navbar-form navbar-right">
-                <div class="form-group">
-                  <input type="text" class="form-control" placeholder="Search">
-                </div>
-                <button type="submit" class="btn btn-default">搜索</button>
-              </form>
             
         </div>
     </div>
@@ -216,7 +211,7 @@
 
                   <!-- Button -->
                   <div class="controls">
-                    <button  class="btn btn-success">保存</button>
+                    <button style="width: 100px;margin-top: 20px" class="btn pull-right btn-success">保存</button>
                   </div>
                 </div>
 

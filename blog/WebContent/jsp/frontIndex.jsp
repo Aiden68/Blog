@@ -12,7 +12,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <link rel="stylesheet" type="text/css" href="<%=path %>/jsp/css/reset.css">
-	<link rel="stylesheet" type="text/css" href="<%=path %>/jsp/css/main2.css">
+	<link rel="stylesheet" type="text/css" href="<%=path %>/jsp/css/addtion.css">
 	<link href="<%=path %>/jsp/css/bootstrap.min.css" rel="stylesheet">
 	<link href="<%=path %>/jsp/css/pagination.css" rel="stylesheet">	
     <link href="<%=path%>/jsp/font-awesome/4.5.0/css/font-awesome.min.css" rel="stylesheet">
@@ -37,15 +37,15 @@
 	        <li ><a href="#">&nbsp; <span class="sr-only">(current)</span></a></li>
 	
 	      </ul>
-	      <form class="navbar-form navbar-left">
+	      <form action="<%=path %>/index" class="navbar-form navbar-left">
 	        <div class="form-group">
-	          <input type="text" class="form-control" placeholder="Search">
+	          <input type="text" class="form-control" name="search" placeholder="Search">
 	        </div>
 	        <button type="submit" class="btn btn-default"><span class="glyphicon glyphicon-search" aria-hidden="true"></span></button>
 	      </form>
 	      <ul class="nav navbar-nav navbar-right">
 	        <li><a class="active" href="#">首页</a></li>
-	        <li><a  href="#">图册</a></li>
+	        <li><a  href="<%=path %>/image?type=3">图册</a></li>
 			<li id="sidebar_trigger"><a  href="#">分类</a></li>
 	      </ul>
 	    </div><!-- /.navbar-collapse -->
@@ -94,15 +94,16 @@
 								</span>
 								<span >In</span>
 								<span >
-									<a href="#" rel="index">
-										<span>algorithm</span>
+									<a href="<%=path %>/index?catName=${post.catName}" rel="index">
+										<span>${post.catName}</span>
 									</a>
 								</span>
 							</span>
 							<span class="post-comments-count">
 								&nbsp; | &nbsp;
-								<a href="#" >
-									<span >0条评论</span>
+								<span class="glyphicon glyphicon-edit" style="color: gray" aria-hidden="true"></span>
+								<a href="<%=path %>/postdetail?id=${post.id}#comment_id" >
+									<span >${post.comSize} 条评论</span>
 								</a>
 							</span>
 							<span >
@@ -111,7 +112,7 @@
 									<i class="fa fa-eye"></i>
 								</span>
 								<span>visitors </span>
-								<span>700</span>
+								<span>${post.visitor}</span>
 							</span>
 						</div>
 					</header>
@@ -158,15 +159,13 @@
 <div class="mask"></div>
 <div id="sidebar">
 	<ul>
-		<li><a class="active" href="#">所有文章</a></li>
-		<li><a href="#">algorithm</a></li>
-		<li><a href="#">java</a></li>
-		<li><a href="#">c&c++</a></li>
-		<li><a href="#">python</a></li>
-		<li><a href="#">tool</a></li>
+		<li><a class="active" href="<%=path %>/index">所有文章</a></li>
+		<c:forEach items="${catList}" var="cat">
+			<li><a href="<%=path%>/index?catName=${cat.catName }">${cat.catName }</a></li>
+		</c:forEach>
 	</ul>
 </div>
-<button class="back-to-top">返回顶部</button>
+<button class="back-to-top"><i class="fa fa-arrow-up"></i></button>
 
 <script src="<%=path %>/jsp/js/jquery-1.11.1.min.js"></script>
 <script src="<%=path %>/jsp/js/bootstrap.min.js"></script>
@@ -186,8 +185,8 @@ $(function(){
         items_per_page:${result.pageSize}, // 每页显示多少条记录
         current_page:${result.currentPage} - 1, // 当前显示第几页数据
         num_display_entries:8, // 分页显示的条目数
-        next_text:"下一页",
-        prev_text:"上一页",
+        next_text:"next",
+        prev_text:"prev",
         num_edge_entries:2, // 连接分页主体，显示的条目数
         callback:handlePaginationClick
 	});

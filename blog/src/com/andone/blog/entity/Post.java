@@ -9,6 +9,10 @@ public class Post {
 	String content;
 	Date createTime;
 	Date updateTime;
+	String catId;
+	String catName;
+	String comSize;
+	String visitor;
 	public String getId() {
 		return id;
 	}
@@ -44,5 +48,29 @@ public class Post {
 	}
 	public void setUpdateTime(Date updateTime) {
 		this.updateTime = updateTime;
+	}
+	public String getCatId() {
+		return catId;
+	}
+	public void setCatId(String catId) {
+		this.catId = catId;
+	}
+	public String getCatName() {
+		return catName;
+	}
+	public void setCatName(String catName) {
+		this.catName = catName;
+	}
+	public String getComSize() {
+		return comSize;
+	}
+	public void setComSize(String comSize) {
+		this.comSize = comSize;
+	}
+	public String getVisitor() {
+		return visitor;
+	}
+	public void setVisitor(String visitor) {
+		this.visitor = visitor;
 	}
 }

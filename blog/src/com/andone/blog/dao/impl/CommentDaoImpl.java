@@ -1,5 +1,6 @@
 package com.andone.blog.dao.impl;
 
+import java.sql.Connection;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
@@ -11,10 +12,8 @@ import org.apache.commons.dbutils.handlers.BeanListHandler;
 
 import com.andone.blog.dao.CommentDao;
 import com.andone.blog.entity.Comment;
-import com.andone.blog.entity.Post;
 import com.andone.blog.util.JdbcUtil;
 import com.andone.blog.util.Pager;
-import com.mysql.jdbc.Connection;
 
 public class CommentDaoImpl implements CommentDao{
 

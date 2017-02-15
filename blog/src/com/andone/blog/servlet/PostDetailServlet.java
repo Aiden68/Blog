@@ -10,10 +10,13 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.jsp.PageContext;
 
+import com.andone.blog.entity.Catagory;
 import com.andone.blog.entity.Comment;
 import com.andone.blog.entity.Post;
+import com.andone.blog.service.CatagoryService;
 import com.andone.blog.service.CommentService;
 import com.andone.blog.service.PostService;
+import com.andone.blog.service.impl.CatagoryServiceImpl;
 import com.andone.blog.service.impl.CommentServiceImpl;
 import com.andone.blog.service.impl.PostServiceImpl;
 
@@ -41,10 +44,16 @@ public class PostDetailServlet extends HttpServlet {
 		CommentService commentService = new CommentServiceImpl();
 		String id = request.getParameter("id");
 		Post post = postService.postFindById(id);
+		Integer visitors = Integer.parseInt(post.getVisitor());
+		visitors++;
+		postService.updatePostVisitors(id, visitors);
 		List<Comment> comList = commentService.findAllCommentByPid(id);
+		CatagoryService catagoryService  = new CatagoryServiceImpl();
+		List<Catagory> catList = catagoryService.findAllCat();
 		request.setAttribute("post", post);
 		request.setAttribute("commentList", comList);
 		request.setAttribute("comSize", comList.size());
+		request.setAttribute("catList", catList);
 		request.getRequestDispatcher("/jsp/frontDetail.jsp").forward(request, response);
 	}
 

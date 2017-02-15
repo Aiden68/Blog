@@ -12,7 +12,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <link rel="stylesheet" type="text/css" href="<%=path %>/jsp/css/reset.css">
-	<link rel="stylesheet" type="text/css" href="<%=path %>/jsp/css/main2.css">
+	<link rel="stylesheet" type="text/css" href="<%=path %>/jsp/css/addtion.css">
 	<link href="<%=path %>/jsp/css/bootstrap.min.css" rel="stylesheet">
 	<link href="<%=path %>/jsp/css/pagination.css" rel="stylesheet">
 	<link rel="stylesheet" type="text/css" href="<%=path %>/jsp/static/highlightjs/agate.css">
@@ -39,15 +39,15 @@
 	        <li ><a href="#">&nbsp; <span class="sr-only">(current)</span></a></li>
 	
 	      </ul>
-	      <form class="navbar-form navbar-left">
+	      <form action="<%=path %>/index" class="navbar-form navbar-left">
 	        <div class="form-group">
-	          <input type="text" class="form-control" placeholder="Search">
+	          <input type="text" class="form-control" name="search" placeholder="Search">
 	        </div>
 	        <button type="submit" class="btn btn-default"><span class="glyphicon glyphicon-search" aria-hidden="true"></span></button>
 	      </form>
 	      <ul class="nav navbar-nav navbar-right">
 	        <li><a  href="<%=path %>/index">首页</a></li>
-	        <li><a  href="#">图册</a></li>
+	        <li><a  href="<%=path %>/image?type=3">图册</a></li>
 			<li id="sidebar_trigger"><a  href="#">分类</a></li>
 	      </ul>
 	    </div><!-- /.navbar-collapse -->
@@ -92,15 +92,15 @@
 								</span>
 								<span >In</span>
 								<span >
-									<a href="#" rel="index">
-										<span>socket</span>
+									<a href="<%=path %>/index?catName=${post.catName}" rel="index">
+										<span>${post.catName}</span>
 									</a>
 								</span>
 							</span>
 							<span class="post-comments-count">
 								&nbsp; | &nbsp;
-								<a href="#" >
-									<span >1条评论</span>
+								<a href="#comment_id" >
+									<span >${post.comSize}条评论</span>
 								</a>
 							</span>
 							<span >
@@ -109,7 +109,7 @@
 									<i class="fa fa-eye"></i>
 								</span>
 								<span>visitors </span>
-								<span>700</span>
+								<span>${post.visitor}</span>
 							</span>
 						</div>
 					</header>
@@ -144,7 +144,7 @@
 						</c:forEach>
 					</c:if> 
 			    </div>	
-			  <form id="comment_id" action="<%=path %>/addcomment?pid=${post.id}" method="post" novalidate="novalidate">
+			  <form id="comment_id" action="<%=path %>/addcomment?pid=${post.id}&comSize=${comSize }" method="post" novalidate="novalidate">
 		        <fieldset>
 		            <legend style="font-family: 'Lato', 'PingFang SC', Microsoft YaHei, sans-serif">说点什么吧...</legend>
 		            <input value="65" type="hidden" name="comment.blog_id">
@@ -193,11 +193,9 @@
 <div id="sidebar">
 	<ul>
 		<li><a href="<%=path %>/index">所有文章</a></li>
-		<li><a href="#">algorithm</a></li>
-		<li><a href="#">java</a></li>
-		<li><a href="#">c&c++</a></li>
-		<li><a href="#">python</a></li>
-		<li><a href="#">tool</a></li>
+		<c:forEach items="${ catList}" var="cat">
+			<li><a href="<%=path%>/index?catName=${cat.catName }">${cat.catName }</a></li>
+		</c:forEach>
 	</ul>
 </div>
 <button  class="back-to-top"><i class="fa fa-arrow-up"></i></button>

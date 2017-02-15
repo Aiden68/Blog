@@ -1,11 +1,28 @@
 ;$(function()
 {
-    'use strict';
     var sidebar = $('#sidebar'),
         mask = $('.mask'),
         backBtn = $('.back-to-top'),
         sidebar_trigger = $('#sidebar_trigger');
     function showSidebar() {
+    	$.ajax( {
+			type    : "POST",
+			url     : "<%=path%>/listcat?time="+new Date().getTime(),
+			success : function(backDate,textStatus,ajax){
+						//alert(backDate!=null?"收到":"为收到");	
+						//alert(ajax.responseText);
+						//解析json文本
+						alert(textStatus);
+						var jsonJS = eval("("+backDate+")");
+						var array = jsonJS;
+					  	var size = array.length;
+					  	for(var i=0;i<size;i++){
+					  		var cat = array[i];
+					  		var $li = $("<li><a href='#'>"+cat+"</a></li>");
+					  		$("#catSelect").append($li);
+					  	}
+					  }
+		} );
         mask.fadeIn();
         sidebar.css('right',0);
     }
@@ -13,7 +30,7 @@
         mask.fadeOut();
         sidebar.css('right',-sidebar.width());
     }
-    sidebar_trigger.on('click',showSidebar);
+    sidebar_trigger.click(showSidebar);
     mask.on('click',hideSidebar);
 
 

@@ -1,10 +1,14 @@
 package com.andone.blog.util;
 
+import java.io.InputStream;
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
+import java.util.Properties;
+
+import com.mchange.v2.c3p0.ComboPooledDataSource;
 
 /**
  * 1. 返回连接 2. 关闭
@@ -13,20 +17,15 @@ import java.sql.Statement;
  * 
  */
 public class JdbcUtil {
-
-	// 连接参数
-	// private String url = "jdbc:mysql://localhost:3306/jdbc_demo";
-	private static String url = "jdbc:mysql:///myblog";
-	private static String user = "root";
-	private static String password = "root";
+	
+	private static ComboPooledDataSource dataSource = new ComboPooledDataSource();
 
 	/**
 	 * 返回连接对象
 	 */
 	public static Connection getConnection() {
 		try {
-			Class.forName("com.mysql.jdbc.Driver");
-			return DriverManager.getConnection(url, user, password);
+			return dataSource.getConnection();
 		} catch (Exception e) {
 			throw new RuntimeException(e);
 		}

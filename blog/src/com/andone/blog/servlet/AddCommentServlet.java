@@ -12,7 +12,9 @@ import javax.servlet.http.HttpServletResponse;
 
 import com.andone.blog.entity.Comment;
 import com.andone.blog.service.CommentService;
+import com.andone.blog.service.PostService;
 import com.andone.blog.service.impl.CommentServiceImpl;
+import com.andone.blog.service.impl.PostServiceImpl;
 
 /**
  * Servlet implementation class AddCommentServlet
@@ -37,17 +39,22 @@ public class AddCommentServlet extends HttpServlet {
 		Date date = new Date();
 		Comment comment = new Comment();
 		CommentService commentService = new CommentServiceImpl();
+		PostService postService = new PostServiceImpl();
 		comment.setName(request.getParameter("comName"));
 		comment.setEmail(request.getParameter("comEmail"));
 		comment.setContent(request.getParameter("comContent"));
+		String tcomSize = request.getParameter("comSize");
+		Integer comSize = Integer.parseInt(tcomSize);
+		comSize++;
 		String pid = request.getParameter("pid");
+		postService.updatePostComSize(pid, comSize);
 		comment.setPid(pid);
 		comment.setCreateTime(date);
 		commentService.addComment(comment);
 		/*List<Comment> comList = commentService.findAllCommentByPid(pid);
 		request.setAttribute("comList", comList);
 		request.setAttribute("comSize", comList.size());*/
-		response.sendRedirect(request.getContextPath()+"/postdetail?id="+pid);
+		response.sendRedirect(request.getContextPath()+"/postdetail?id="+pid+"#comment_id");
 	}
 
 	/**

@@ -18,11 +18,10 @@
 	<div class="main-wrapper">
 		<header>
 			<nav>
-				<div class="logo"><a href="#">AndOne的博客</a></div>
+				<div class="logo"><a href="<%=path %>/index">AndOne的博客</a></div>
 				<ul>				
 					<li><a href="#" class="active">首页</a></li>
-					<li><a href="#"></a></li>
-					<li><a href="#">图册</a></li>
+					<li><a href="<%=path %>/image?type=3">图册</a></li>
 					<li id="sidebar_trigger"><a href="#">分类</a></li>
 				</ul>
 			</nav>
@@ -49,8 +48,8 @@
 					</div>
 					<div class="icon-group">
 					<a href="<%=path %>/index"><span class="icon"><i class="fa fa-file-text-o  fa-2x"></i>博客</span></a> 
-						<a href="#"><span class="icon"><i class="fa fa-picture-o fa-2x"></i>图册</span> </a> 
-						<a href="#"><span class="icon"><i class="fa fa-sort-amount-desc fa-2x"></i>分类</span></a>
+						<a href="<%=path %>/image?type=3"><span class="icon"><i class="fa fa-picture-o fa-2x"></i>图册</span> </a> 
+						<a href="#" id="sidebar_trigger2"><span class="icon"><i class="fa fa-sort-amount-desc fa-2x"></i>分类</span></a>
 					</div>
 				</div>
 			</section>
@@ -169,20 +168,82 @@
 
 	</div>
 	<div id="sidebar">
-		<ul>
+		<ul id = "catSelect">
 			<li><a href="<%=path %>/index">所有文章</a></li>
-			<li><a href="#">algorithm</a></li>
-			<li><a href="#">java</a></li>
-			<li><a href="#">c&c++</a></li>
-			<li><a href="#">python</a></li>
-			<li><a href="#">tool</a></li>
+			<%-- <li><a href="<%=path %>/index?catName=PAT甲级">PAT甲级</a></li> --%>
 		</ul>
 	</div>
 	<button class="back-to-top">返回顶部</button>
 	<script src="<%=path %>/jsp/js/jquery-1.11.1.min.js"></script>
-	<script src="<%=path %>/jsp/js/main.js"></script>
+	<script src="<%=path %>/jsp/js/bootstrap.min.js"></script>
+	<%-- <script src="<%=path %>/jsp/js/main.js"></script> --%>
 	<script type="text/javascript">
-		
+	var sidebar = $('#sidebar'),
+    mask = $('.mask'),
+    backBtn = $('.back-to-top'),
+    sidebar_trigger = $('#sidebar_trigger'),
+	sidebar_trigger2 = $('#sidebar_trigger2');
+	function showSidebar() {
+		var len = $("#catSelect li").size();
+		if(len == 1){
+			$.ajax( {
+				type    : "POST",
+				url     : "<%=path%>/listcat?time="+new Date().getTime(),
+				success : function(backDate,textStatus,ajax){
+							//alert(backDate!=null?"收到":"为收到");	
+							//alert(ajax.responseText);
+							//解析json文本
+							var jsonJS = eval("("+backDate+")");
+							var array = jsonJS;
+						  	var size = array.length;
+						  	for(var i=0;i<size;i++){
+						  		var cat = array[i];
+						  		var url = "<%=path%>/index?catName="+cat;
+						  		var $li = $("<li><a href="+ url +">"+cat+"</a></li>");
+						  		$("#catSelect").append($li);
+						  	}
+						  	mask.fadeIn();
+						    sidebar.css('right',0);	
+						  }
+			} );
+		}
+		else{
+			mask.fadeIn();
+		    sidebar.css('right',0);	
+		}
+	}
+	
+	function hideSidebar() {
+        mask.fadeOut();
+        sidebar.css('right',-sidebar.width());
+    }
+    sidebar_trigger.click(showSidebar);
+    sidebar_trigger2.click(showSidebar);
+    mask.on('click',hideSidebar);
+
+
+    backBtn.on('click',function () {
+        $('html,body').animate({
+            scrollTop:0
+        }, 800)
+    })
+
+    $(window).on('scroll',function () {
+        if($(window).scrollTop() > $(window).height())
+            backBtn.fadeIn();
+        else
+            backBtn.fadeOut();
+    })
+
+    $(window).trigger('scroll');
+
+    var sm = $('#scrollmore');
+        var t = $(window).scrollTop();
+        sm.on('click',function () {
+            $('html,body').animate({
+            scrollTop:t+700
+            }, 800)
+        })
 	</script>
 </body>
 
